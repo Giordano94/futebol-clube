@@ -2,7 +2,7 @@ import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
 
 export default class TeamModel extends Model {
-  declare id: number;
+  declare readonly id: number;
   declare teamName: string;
 }
 
