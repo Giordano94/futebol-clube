@@ -1,7 +1,9 @@
 import { ModelStatic } from 'sequelize';
+import { ITeam } from '../Interfaces/ITeam';
+import { IServiceReader } from '../Interfaces/IService';
 import TeamModel from '../database/models/TeamModel';
 
-export default class TeamsService {
+export default class TeamsService implements IServiceReader<ITeam> {
   model: ModelStatic<TeamModel> = TeamModel;
 
   async getAllTeams(): Promise<TeamModel[]> {
