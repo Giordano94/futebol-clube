@@ -1,4 +1,5 @@
 import { ModelStatic } from 'sequelize';
+import IMatchAtributesGoals from '../Interfaces/IMatchAtributesGoals';
 import TeamModel from '../database/models/TeamModel';
 import MatchesModel from '../database/models/MatchModel';
 
@@ -31,6 +32,13 @@ export default class MatchService {
   finishMatchById = async (id: number) => {
     await this.model.update({ inProgress: false }, { where: { id } });
     const validResponse = { status: 200, message: 'Finished' };
+
+    return validResponse;
+  };
+
+  updateAtributesMatches = async (atributes: IMatchAtributesGoals, id: number) => {
+    await this.model.update(atributes, { where: { id } });
+    const validResponse = { status: 200, message: ' updated atributes' };
 
     return validResponse;
   };

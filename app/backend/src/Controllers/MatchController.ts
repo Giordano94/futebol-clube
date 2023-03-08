@@ -22,4 +22,17 @@ export default class MatchController {
 
     return res.status(status).json({ message });
   };
+
+  updateAtributesMatches = async (req: Request, res: Response) => {
+    const {
+      params: { id },
+    } = req;
+
+    const updatedAtributes = req.body;
+
+    const { status, message } = await this.matchService
+      .updateAtributesMatches(updatedAtributes, Number(id));
+
+    return res.status(status).json({ message });
+  };
 }

@@ -12,5 +12,10 @@ router.patch(
   validateJsonToken,
   (req: Request, res: Response) => matchController.finishMatchById(req, res),
 );
+router.patch(
+  '/matches/:id',
+  validateJsonToken,
+  (req: Request, res: Response) => matchController.updateAtributesMatches(req, res),
+);
 
 export default router;
