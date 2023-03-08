@@ -1,7 +1,6 @@
 import { ModelStatic } from 'sequelize';
 import TeamModel from '../database/models/TeamModel';
 import MatchesModel from '../database/models/MatchModel';
-// import IMatch from '../Interfaces/IMatch';
 
 export default class MatchService {
   model: ModelStatic<MatchesModel> = MatchesModel;
@@ -28,4 +27,11 @@ export default class MatchService {
 
     return allMatches;
   }
+
+  finishMatchById = async (id: number) => {
+    await this.model.update({ inProgress: false }, { where: { id } });
+    const validResponse = { status: 200, message: 'Finished' };
+
+    return validResponse;
+  };
 }
