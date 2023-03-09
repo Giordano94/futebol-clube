@@ -35,4 +35,17 @@ export default class MatchController {
 
     return res.status(status).json({ message });
   };
+
+  insertMatch = async (req:Request, res: Response) => {
+    const newMatch = req.body;
+    console.log('newMachCOntroller', newMatch);
+
+    const { status, message } = await this.matchService.insertMatch(newMatch);
+
+    if (status === 404 || status === 422) {
+      return res.status(status).json({ message });
+    }
+
+    return res.status(status).json(message);
+  };
 }
