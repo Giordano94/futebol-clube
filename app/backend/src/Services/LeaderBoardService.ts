@@ -26,4 +26,22 @@ export default class LeaderBoardService {
 
     return orderedLeaderBoard(Object.values(board));
   }
+
+  async createAwayTeamLeaderBoard(): Promise<ILeaderBoard[]> {
+    const [teams, matches] = await Promise.all([this.modelTeams.findAll(),
+      this.modelMatches.findAll({ where: { inProgress: false } })]);
+
+    const board: { [teamName: string]: ILeaderBoard } = {};
+
+    for (let i = 0; i < teams.length; i += 1) {
+      const team = teams[i];
+      board[team.teamName] = createLeaderBoardTeam(
+        team.teamName,
+        matches.filter((match) => match.awayTeamId === team.id),
+        ['awayTeamGoals', 'homeTeamGoals'],
+      );
+    }
+
+    return orderedLeaderBoard(Object.values(board));
+  }
 }
