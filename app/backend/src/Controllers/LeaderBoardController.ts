@@ -8,4 +8,9 @@ export default class leaderBoardController {
     const leaderBoard = await this.leaderBoardService.createHomeTeamLeaderBoard();
     res.status(200).json(leaderBoard);
   }
+
+  async awayLeaderBoard(_req: Request, res: Response): Promise<Response | void> {
+    const leaderBoard = await this.leaderBoardService.createAwayTeamLeaderBoard();
+    res.status(200).json(leaderBoard);
+  }
 }
