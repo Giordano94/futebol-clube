@@ -1,5 +1,5 @@
 import { ModelStatic } from 'sequelize';
-import { orderedLeaderBoard } from '../Utils/countersAllLeaderBoard';
+import { createLeaderBoardAllTeams, orderedLeaderBoard } from '../Utils/countersAllLeaderBoard';
 import { createLeaderBoardTeam } from '../Utils/countersLeaderBoard';
 import ILeaderBoard from '../Interfaces/ILeaderBoard';
 import MatchesModel from '../database/models/MatchModel';
@@ -42,6 +42,29 @@ export default class LeaderBoardService {
       );
     }
 
+    return orderedLeaderBoard(Object.values(board));
+  }
+
+  async createAllTeamsLeaderBoard(): Promise<ILeaderBoard[]> {
+    const [teams, matches] = await Promise.all([this.modelTeams.findAll(),
+      this.modelMatches.findAll({ where: { inProgress: false } })]);
+
+    const board: { [teamName: string]: ILeaderBoard } = {};
+
+    for (let i = 0; i < teams.length; i += 1) {
+      const team = teams[i];
+      const home = [];
+      const away = [];
+      for (let j = 0; j < matches.length; j += 1) {
+        const match = matches[j];
+        if (match.homeTeamId === team.id) {
+          home.push(match);
+        } else if (match.awayTeamId === team.id) {
+          away.push(match);
+        }
+      }
+      board[team.teamName] = createLeaderBoardAllTeams(team.teamName, home, away);
+    }
     return orderedLeaderBoard(Object.values(board));
   }
 }
