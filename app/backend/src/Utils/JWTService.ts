@@ -1,5 +1,4 @@
 import * as jsonwebtoken from 'jsonwebtoken';
-// import IUser from '../Interfaces/IUser';
 import ILogin from '../Interfaces/ILogin';
 
 const { JWT_SECRET } = process.env;

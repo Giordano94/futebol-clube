@@ -16,7 +16,7 @@ router.post(
 router.get(
   '/login/role',
   validateJsonToken,
-  (req: Request, res: Response) => res.status(200).json({ role: res.locals.user.role }),
+  (_req: Request, res: Response) => res.status(200).json({ role: res.locals.user.role }),
 );
 
 export default router;

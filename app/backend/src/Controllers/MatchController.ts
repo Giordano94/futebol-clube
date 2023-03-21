@@ -17,7 +17,7 @@ export default class MatchController {
     const {
       params: { id },
     } = req;
-    console.log(id);
+
     const { status, message } = await this.matchService.finishMatchById(Number(id));
 
     return res.status(status).json({ message });

@@ -6,11 +6,10 @@ export default class UserController {
 
   login = async (req: Request, res: Response) => {
     const { status, message } = await this.userService.login(req.body);
+    // console.log('REQBODY', req.body);
     if (status === 401) {
       return res.status(status).json({ message });
     }
-    // console.log('REQ.BODY ', req.body);
     res.status(status).json(message);
-    // console.log({ status, message });
   };
 }

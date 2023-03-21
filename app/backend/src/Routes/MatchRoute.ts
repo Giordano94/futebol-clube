@@ -7,6 +7,13 @@ const router = Router();
 const matchController = new MatchController();
 
 router.get('/matches', (req: Request, res: Response) => matchController.getAllMatches(req, res));
+
+router.post(
+  '/matches',
+  validateJsonToken,
+  (req: Request, res: Response) => matchController.insertMatch(req, res),
+);
+
 router.patch(
   '/matches/:id/finish',
   validateJsonToken,

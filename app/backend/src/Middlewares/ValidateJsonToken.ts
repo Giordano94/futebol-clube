@@ -19,7 +19,7 @@ const tokenAuthentication: RequestHandler = (req, res, next) => {
   try {
     const token = jsonwebtoken.verify(jwt, secret);
     res.locals.user = token;
-    // console.log('res.locals.user', res.locals.user);
+    console.log('res.locals.user', res.locals.user);
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Token must be a valid token' });

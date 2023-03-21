@@ -20,9 +20,9 @@ export default class UserService {
     // console.log('User', user.dataValues);
 
     const comparePassword = bcrypt.compareSync(login.password, user?.password || '-');
-    // console.log('login.password', login.password);
-    // console.log('user.password', user.password);
-    // console.log('comparePassword', comparePassword);
+    // console.log('LOGIN.PASSWORD', login.password);
+    // console.log('USER.PASSWORD', user.password);
+    // console.log('COMPAREPASSWORD', comparePassword);
 
     if (comparePassword === false) return invalidResponse;
 
